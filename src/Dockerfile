@@ -1,7 +1,8 @@
 # Based on:
 # - https://github.com/jshimko/meteor-launchpad/blob/master/Dockerfile
 # - https://github.com/meteor/galaxy-images/blob/master/ubuntu/Dockerfile
-FROM ubuntu
+ARG UBUNTU_VERSION=latest
+FROM ubuntu:$UBUNTU_VERSION
 
 # Meteor version to build for; see ../build.sh
 ARG METEOR_VERSION
@@ -26,7 +27,6 @@ RUN curl https://install.meteor.com/?release=$METEOR_VERSION --output /tmp/insta
 
 # Fix permissions warning; https://github.com/meteor/meteor/issues/7959
 ENV METEOR_ALLOW_SUPERUSER true
-
 
 # Copy entrypoint and dependencies
 COPY ./docker $SCRIPTS_FOLDER/
